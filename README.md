@@ -1,4 +1,4 @@
-*Note: This is WIP and does currently not produce usable builds*
+*Note: This is WIP but it produces working builds now. Use at your own risk!*
 
 # About
 The Synthstrom Audible Deluge Firmware runs on the Deluge portable sequencer, synthesizer and sampler, produced by Synthstrom Audible Limited.

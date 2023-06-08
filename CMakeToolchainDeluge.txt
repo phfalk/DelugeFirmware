@@ -20,7 +20,7 @@ set(CMAKE_RANLIB                    ${ARM_TOOLCHAIN_BIN_PATH}/arm-none-eabi-ranl
 set(CMAKE_SIZE                      ${ARM_TOOLCHAIN_BIN_PATH}/arm-none-eabi-size${CMAKE_EXECUTABLE_SUFFIX} CACHE INTERNAL "")
 set(CMAKE_STRIP                     ${ARM_TOOLCHAIN_BIN_PATH}/arm-none-eabi-strip${CMAKE_EXECUTABLE_SUFFIX} CACHE INTERNAL "")
 
-set(CMAKE_ASM_FLAGS                 "-mcpu=cortex-a9 -march=armv7-a -marm -mthumb-interwork -mlittle-endian -mfloat-abi=hard -mfpu=neon -fdiagnostics-parseable-fixits -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wnull-dereference -Wstack-usage=1000 -x assembler-with-cpp -c")
+set(CMAKE_ASM_FLAGS                 "-mcpu=cortex-a9 -march=armv7-a -marm -mthumb-interwork -mlittle-endian -mfloat-abi=hard -mfpu=neon -fdiagnostics-parseable-fixits -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wnull-dereference -Wstack-usage=1000 -x assembler-with-cpp")
 set(CMAKE_C_FLAGS                   "-mcpu=cortex-a9 -march=armv7-a -marm -mthumb-interwork -mlittle-endian -mfloat-abi=hard -mfpu=neon -fdiagnostics-parseable-fixits -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wnull-dereference -Wstack-usage=1000 -T ${CMAKE_CURRENT_LIST_DIR}/linker_script_rz_a1l.ld -Wl,--start-group -Wl,--end-group -nostartfiles -Xlinker --gc-sections -Wl,-Map,\"Deluge-debug-oled.map\" -Wl,-estart --specs=rdimon.specs" CACHE INTERNAL "")
 set(CMAKE_CXX_FLAGS                 "${CMAKE_C_FLAGS}" CACHE INTERNAL "")
 

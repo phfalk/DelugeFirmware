@@ -4,7 +4,9 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/CMakeToolchainDeluge.txt)
 
 project(DelugeFirmware LANGUAGES CXX C ASM)
 
-add_executable(DelugeFirmware)
+add_executable(DelugeFirmware
+    src/drivers/RZA1/compiler/asm/start.S
+)
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} build_type)
 if (build_type STREQUAL oled-debug)
@@ -90,61 +92,64 @@ target_sources(DelugeFirmware PUBLIC
     src/drivers/RZA1/usb/r_usb_basic/src/hw/r_usb_hreg_access.c
     src/drivers/RZA1/usb/USBConnection.c
     src/drivers/RZA1/uart/sio_char.c
-    src/drivers/RZA1/cache/cache.c
-    src/drivers/RZA1/stb/stb.c
     src/drivers/RZA1/system/rza_io_regrw.c
-    src/drivers/RZA1/mtu/mtu.c
-    src/drivers/RZA1/gpio/gpio.c
-    src/drivers/RZA1/compiler/asm/l1_cache_init.S
-    src/drivers/RZA1/compiler/asm/access.S
-    src/drivers/RZA1/compiler/asm/initsct.S
-    src/drivers/RZA1/compiler/asm/reset_handler.S
-    src/drivers/RZA1/compiler/asm/ttb_init.S
-    src/drivers/RZA1/compiler/asm/isr.S
-    src/drivers/RZA1/compiler/asm/start.S
-    src/drivers/RZA1/compiler/asm/irqfiq_handler.S
-    src/drivers/All_CPUs/invalidate.S
-    src/drivers/RZA1/bsc/bsc_userdef.c
+    src/drivers/RZA1/stb/stb.c
     src/drivers/RZA1/ssi/ssi.c
-    src/drivers/RZA1/sdhi/userdef/sd_dev_low.c
+    src/drivers/RZA1/spibsc/spibsc_Deluge_setup.c
+    src/drivers/RZA1/spibsc/spibsc_flash_api.c
+    src/drivers/RZA1/spibsc/spibsc_flash_userdef.c
+    src/drivers/RZA1/spibsc/spibsc_ioset_api.c
+    src/drivers/RZA1/spibsc/spibsc_ioset_drv.c
+    src/drivers/RZA1/spibsc/spibsc_ioset_userdef.c
     src/drivers/RZA1/sdhi/userdef/sd_dev_dmacdrv.c
-    src/drivers/RZA1/sdhi/src/sd/sdio/sdio_util.c
+    src/drivers/RZA1/sdhi/userdef/sd_dev_low.c
     src/drivers/RZA1/sdhi/src/sd/sdio/sdio_direct.c
-    src/drivers/RZA1/sdhi/src/sd/sdio/sdio_trns.c
-    src/drivers/RZA1/sdhi/src/sd/sdio/sdio_read.c
     src/drivers/RZA1/sdhi/src/sd/sdio/sdio_int.c
+    src/drivers/RZA1/sdhi/src/sd/sdio/sdio_read.c
+    src/drivers/RZA1/sdhi/src/sd/sdio/sdio_trns.c
+    src/drivers/RZA1/sdhi/src/sd/sdio/sdio_util.c
     src/drivers/RZA1/sdhi/src/sd/sdio/sdio_write.c
-    src/drivers/RZA1/sdhi/src/sd/access/sd_util.c
-    src/drivers/RZA1/sdhi/src/sd/access/sd_mount.c
-    src/drivers/RZA1/sdhi/src/sd/access/sd_trns.c
     src/drivers/RZA1/sdhi/src/sd/access/sd_cd.c
     src/drivers/RZA1/sdhi/src/sd/access/sd_cmd.c
-    src/drivers/RZA1/sdhi/src/sd/access/sd_upcase_table.c
-    src/drivers/RZA1/sdhi/src/sd/access/sd_write.c
-    src/drivers/RZA1/sdhi/src/sd/access/sd_int.c
     src/drivers/RZA1/sdhi/src/sd/access/sd_format.c
     src/drivers/RZA1/sdhi/src/sd/access/sd_init.c
+    src/drivers/RZA1/sdhi/src/sd/access/sd_int.c
+    src/drivers/RZA1/sdhi/src/sd/access/sd_mount.c
     src/drivers/RZA1/sdhi/src/sd/access/sd_read.c
-    src/drivers/RZA1/diskio.c
+    src/drivers/RZA1/sdhi/src/sd/access/sd_trns.c
+    src/drivers/RZA1/sdhi/src/sd/access/sd_upcase_table.c
+    src/drivers/RZA1/sdhi/src/sd/access/sd_util.c
+    src/drivers/RZA1/sdhi/src/sd/access/sd_write.c
+    src/drivers/RZA1/rspi/rspi.c
     src/drivers/RZA1/oled/oled_low_level.c
+    src/drivers/RZA1/mtu/mtu.c
+    src/drivers/RZA1/intc/intc.c
     src/drivers/RZA1/intc/intc_handler.c
     src/drivers/RZA1/intc/intc_userdef.c
-    src/drivers/RZA1/intc/intc.c
-    src/drivers/RZA1/spibsc/spibsc_ioset_drv.c
-    src/drivers/RZA1/spibsc/spibsc_flash_userdef.c
-    src/drivers/RZA1/spibsc/spibsc_flash_api.c
-    src/drivers/RZA1/spibsc/spibsc_ioset_userdef.c
-    src/drivers/RZA1/spibsc/spibsc_ioset_api.c
-    src/drivers/RZA1/spibsc/spibsc_Deluge_setup.c
+    src/drivers/RZA1/gpio/gpio.c
+    src/drivers/RZA1/compiler/asm/access.S
+    src/drivers/RZA1/compiler/asm/initsct.S
+    src/drivers/RZA1/compiler/asm/irqfiq_handler.S
+    src/drivers/RZA1/compiler/asm/isr.S
+    src/drivers/RZA1/compiler/asm/l1_cache_init.S
+    src/drivers/RZA1/compiler/asm/reset_handler.S
+    src/drivers/RZA1/compiler/asm/start.S
+    src/drivers/RZA1/compiler/asm/ttb_init.S
+    src/drivers/RZA1/cache/cache.c
+    src/drivers/RZA1/bsc/bsc_userdef.c
+    src/drivers/RZA1/diskio.c
     src/drivers/RZA1/peripheral_init_basic.c
-    src/drivers/RZA1/rspi/rspi.c
-    src/drivers/All_CPUs/sd_all_cpus.c
+    src/drivers/All_CPUs/uart_all_cpus/uart_all_cpus.c
     src/drivers/All_CPUs/ssi_all_cpus/ssi_all_cpus.c
     src/drivers/All_CPUs/rspi_all_cpus/rspi_all_cpus.c
-    src/drivers/All_CPUs/uart_all_cpus/uart_all_cpus.c
-    src/drivers/All_CPUs/oled_low_level_all_cpus/oled_low_level_all_cpus.c
     src/drivers/All_CPUs/oled_low_level_all_cpus/fonts.c
+    src/drivers/All_CPUs/oled_low_level_all_cpus/oled_low_level_all_cpus.c
     src/drivers/All_CPUs/dmac/dmac.c
+    src/drivers/All_CPUs/invalidate.S
+    src/drivers/All_CPUs/sd_all_cpus.c
+    src/RTT/SEGGER_RTT.c
+    src/RTT/SEGGER_RTT_ASM_ARMv7M.S
+    src/RTT/SEGGER_RTT_printf.c
     src/NE10/modules/dsp/NE10_fft_int32.c
     src/NE10/modules/dsp/NE10_init_dsp.c
     src/NE10/modules/dsp/NE10_fft_generic_int32.neonintrinsic.cpp
@@ -154,9 +159,6 @@ target_sources(DelugeFirmware PUBLIC
     src/NE10/modules/dsp/NE10_fft_generic_int32.cpp
     src/NE10/modules/NE10_init.c
     src/NE10/common/NE10_mask_table.c
-    src/RTT/SEGGER_RTT.c
-    src/RTT/SEGGER_RTT_ASM_ARMv7M.S
-    src/RTT/SEGGER_RTT_printf.c
     src/Action.cpp
     src/ActionClipState.cpp
     src/ActionLogger.cpp
