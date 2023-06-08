@@ -2,9 +2,44 @@ cmake_minimum_required(VERSION 3.25)
 
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/CMakeToolchainDeluge.txt)
 
-project(DelugeFirmware VERSION 4.1.3 LANGUAGES CXX C ASM)
+project(DelugeFirmware LANGUAGES CXX C ASM)
 
 add_executable(DelugeFirmware)
+
+string(TOLOWER ${CMAKE_BUILD_TYPE} build_type)
+if (build_type STREQUAL oled-debug)
+    target_compile_definitions(DelugeFirmware PRIVATE
+        "-DHAVE_OLED"
+    )
+    target_compile_options(DelugeFirmware PRIVATE
+        "-Og"
+        "-g"
+    )
+endif()
+
+if (build_type STREQUAL oled-release)
+    target_compile_definitions(DelugeFirmware PRIVATE
+        "-DHAVE_OLED"
+        "-DNDEBUG"
+    )
+    target_compile_options(DelugeFirmware PRIVATE
+        "-Os"
+    )
+endif()
+if (build_type STREQUAL 7seg-debug)
+    target_compile_options(DelugeFirmware PRIVATE
+        "-Og"
+        "-g"
+    )
+endif()
+if (build_type STREQUAL 7seg-release)
+    target_compile_definitions(DelugeFirmware PRIVATE
+        "-DNDEBUG"
+    )
+    target_compile_options(DelugeFirmware PRIVATE
+        "-Os"
+    )
+endif()
 
 add_custom_command(TARGET DelugeFirmware POST_BUILD COMMAND ${CMAKE_OBJCOPY} -Oihex DelugeFirmware DelugeFirmware.hex VERBATIM)
 add_custom_command(TARGET DelugeFirmware POST_BUILD COMMAND ${CMAKE_OBJCOPY} -Obinary DelugeFirmware DelugeFirmware.bin VERBATIM)
