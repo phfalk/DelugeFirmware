@@ -23,7 +23,9 @@ if (build_type STREQUAL oled-release)
         "-DNDEBUG"
     )
     target_compile_options(DelugeFirmware PRIVATE
-        "-Os"
+        "-flto"
+        "-O2"
+        "-s"
     )
 endif()
 if (build_type STREQUAL 7seg-debug)
@@ -37,7 +39,9 @@ if (build_type STREQUAL 7seg-release)
         "-DNDEBUG"
     )
     target_compile_options(DelugeFirmware PRIVATE
-        "-Os"
+        "-flto"
+        "-O2"
+        "-s"
     )
 endif()
 
