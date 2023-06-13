@@ -33,20 +33,20 @@
  * this might be what you want to do. If so, go to src/drivers/RZA1/cpu_specific.h,
  * and set HAVE_RTT to 0. Though this configuration hasn’t been tested for a while...
  */
-
+#ifndef ENABLE_TEXT_OUTPUT
 #define ENABLE_TEXT_OUTPUT 0
+#endif
 
-
-struct UartItem { // Exactly 8 bytes, so can align nicely to cache line
-	uint16_t txBufferWritePos;
-	uint16_t txBufferReadPos;
-	uint16_t txBufferReadPosAfterTransfer;
-	uint8_t txSending;
-	uint8_t shouldDoConsecutiveTransferAfter; // Applies to MIDI only - for PIC, always tries to do this
+struct UartItem
+{ // Exactly 8 bytes, so can align nicely to cache line
+    uint16_t txBufferWritePos;
+    uint16_t txBufferReadPos;
+    uint16_t txBufferReadPosAfterTransfer;
+    uint8_t txSending;
+    uint8_t shouldDoConsecutiveTransferAfter; // Applies to MIDI only - for PIC, always tries to do this
 };
 
 extern struct UartItem uartItems[];
-
 
 uint8_t uartGetChar(int item, char_t* readData);
 uint32_t* uartGetCharWithTiming(int timingCaptureItem, char_t* readData);
@@ -62,6 +62,5 @@ void uartPrintFloat(float number);
 void uartFlushIfNotSending(int item);
 int uartGetTxBufferFullnessByItem(int item);
 int uartGetTxBufferSpace(int item);
-
 
 #endif /* DRIVERS_ALL_CPUS_UART_ALL_CPUS_UART_ALL_CPUS_H_ */
