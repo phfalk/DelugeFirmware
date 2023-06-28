@@ -431,6 +431,7 @@ target_include_directories(DelugeFirmware PUBLIC
     src/drivers/All_CPUs/usb/userdef
     src/drivers/RZA1
     src/drivers/RZA1/bsc
+    src/drivers/RZA1/compiler/asm/inc
     src/drivers/RZA1/dma
     src/drivers/RZA1/gpio
     src/drivers/RZA1/intc
@@ -448,6 +449,7 @@ target_include_directories(DelugeFirmware PUBLIC
     src/drivers/RZA1/sdhi/userdef
     src/drivers/RZA1/spibsc
     src/drivers/RZA1/ssi
+    /src/drivers/RZA1/stb
     src/drivers/RZA1/system
     src/drivers/RZA1/system/iobitmasks
     src/drivers/RZA1/system/iodefines
